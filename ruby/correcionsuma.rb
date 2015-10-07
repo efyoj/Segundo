@@ -8,7 +8,7 @@ end
 
 def entrada(numero)
 	print "Operando #{numero.to_s}: "
-	gets.chomp
+	gets.to_i
 end
 
 op1 = entrada(1)
