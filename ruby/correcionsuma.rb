@@ -2,6 +2,8 @@
 # correcionsuma.rb
 #Suma dos número introducidos por el usuario
 
+require 'highline/import'
+
 def suma(op1, op2)
 	op1.to_i + op2.to_i
 end
