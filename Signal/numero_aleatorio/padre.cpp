@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/types.h>
+#include <sys/wait.h>
 
 
 void lanza(const char *programa){
@@ -15,7 +16,13 @@ void lanza(const char *programa){
 
 int main(int argc, char *argv[]) {
 
+    int estado_de_terminacion;
+
     lanza("./aleatorio");
+    wait(&estado_de_terminacion);
+
+    if(WIFEXITED(estado_de_terminacion))
+	system("cat numero");
 
     return EXIT_SUCCESS;
 }
