@@ -11,19 +11,19 @@ FILE * pFile;
 int numero_rand(){
     char buf[BUFSIZ];
     srand(time(NULL));
-    pFile = fopen(".numero.txt","w");
-    sprintf(buf,"%i",(0+rand()%100));
+    pFile = fopen("numero.txt","w");
+    sprintf(buf,"%i",rand());
     fputs(buf,pFile);
     fclose(pFile);
 }
 
-int spawn (char* numero_rand, char** arg_list){
+int spawn (const char* numero_rand){
     pid_t child_pid;
     child_pid = fork();
     if (child_pid != 0)
 	return child_pid;
     else {
-	execvp (numero_rand,arg_list);
+	execl(numero_rand, numero_rand, NULL);
 	fprintf(stderr, "Error\n");
 	abort();
     }
@@ -34,11 +34,7 @@ int main(int argc, char *argv[]) {
 
     int child_status;
 
-    char* arg_list[] = {
-    "./rand",
-    NULL};
-
-    spawn("./rand",arg_list);
+    spawn("./rand");
 
     wait (&child_status);
     if(WIFEXITED (child_status)){
